@@ -407,6 +407,15 @@ void deleteAVL(avlNode **root, int value)   //////nie dziala!
     }
 }
 
+int heightAVL(avlNode *root)
+{
+    if(root == NULL) return 0;
+    int h1 = heightAVL(root->left);
+    int h2 = heightAVL(root->right);
+    if (h1>h2) return 1+h1;
+    else return 1+h2;
+}
+
 void preOrder(avlNode *root)    ////wyœwietlanie w porzadku preorder
 {
     if (root == NULL) return;
@@ -426,12 +435,13 @@ void inOrder(avlNode *root, int *tab, int *i)    ////wyœwietlanie w porzadku in
 
 int main()
 {
-    int toFind, toInsert, toDelete;
+    int toFind, toInsert, toDelete, tabBST[10], tabAVL[10];
     element *head, *curr;
     head = NULL;
     clock_t startl, stopl, startb, stopb, starta, stopa;
     printf("Pomiary czasu operacji dla zakresu co 10000\n\n");
     printf("R.Operacji          Lista      BST     AVL\n\n");
+    int j=0;
 for(size=10000;size<=100000;size+=10000){
     printf("%d\n",size);
     ////Tablica
@@ -469,6 +479,9 @@ for(size=10000;size<=100000;size+=10000){
     //printf("\ndrzewo AVL preorder:\n");
     //preOrder(avlRoot);
 printf("WSTAWIANNIE      %.5f    %.5f    %.5f\n", (stopl-startl)/(double)CLOCKS_PER_SEC,(stopb-startb)/(double)CLOCKS_PER_SEC,(stopa-starta)/(double)CLOCKS_PER_SEC);
+    tabBST[j]=heightAVL(avlRoot);
+    tabAVL[j]=heightBST(bstRoot);
+    j++;
 /*
     //SZUKANIE
     printf("\n\n----------SZUKANIE----------\n");
@@ -548,5 +561,9 @@ printf("WSTAWIANNIE      %.5f    %.5f    %.5f\n", (stopl-startl)/(double)CLOCKS_
     printf("\n");
     free(tab);
     free(tab2);
+}
+printf("Wysokosci drzew:    BST    AVL\n");
+for(i=0;i<10;i++){
+printf("                    %d     %d\n",tabBST[i],tabBST[i]);
 }
 }
