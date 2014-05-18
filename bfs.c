@@ -130,7 +130,7 @@ void BFS_adjmatrix(int *adjmatrix[], int w)
     }
 }
 
-void adjList_gen(int n, int* adjlist, int** adjmatrix, int indeg[])      //tworzenie listy sasiedztwa
+void adjList_gen(int n, int* adjlist, int** adjmatrix, int* indeg)      //tworzenie listy sasiedztwa
 {
     slistEl *newEl;
     for (i=0; i<n; i++)
@@ -184,11 +184,8 @@ void DFS_adjlist(int* adjlist[], int w)
     }
 }
 
-void BFS_adjlist(int *L[],int indeg[])
+void BFS_adjlist(int* L,int* indeg)
 {
-
-    // zerujemy tablicę list sąsiedztwa i tablicę stopni wejściowych
-
 
 // tworzymy stos QS[ ], na którym będziemy umieszczać wierzchołki grafu
 // o zerowym stopniu wejściowym
@@ -196,7 +193,7 @@ void BFS_adjlist(int *L[],int indeg[])
   int nQ = 0, QS[n + 1];
 
 // przeglądamy graf w poszukiwaniu wierzchołków o stopniu wejściowym zero
- int v;
+  int v;
   for(v = 1; v <= n; v++) if(!indeg[v]) QS[nQ++] = v;
 
 // tworzymy stos TSS[ ] wierzchołków posortowanych topologicznie
@@ -213,10 +210,10 @@ void BFS_adjlist(int *L[],int indeg[])
     {
       if(!(--indeg[p->value])) QS[nQ++] = p->value;
       p = p->next;
-    }
+    }z
     TSS[nTS++] = v;
   }
-  for( i = 0; i < n; i++){printf("%d",TSS[i]);}
+  for( i = 0; i < n; i++){printf("%d ",TSS[i]);}
 }
 
 void edgeList_gen(int n, int **edgeTab, int **adjmatrix)
@@ -339,11 +336,12 @@ int main()
     slistEl ** adjlist;
     slistEl *newEl, *toDel, *currEl;
     adjlist = (slistEl*)malloc(n*sizeof(slistEl));
-        int indeg[n+1];
+    int indeg[n+1];
      for(i = 1; i <= n; i++)
-  {
-    indeg[i] = 0;
-  }
+        {
+        indeg[i] = 0;
+        adjlist[i]=NULL;
+        }
     //LISTA SASIEDZTWA
     adjList_gen(n, adjlist, adjmatrix, indeg);
     adjList_print(n, adjlist);
