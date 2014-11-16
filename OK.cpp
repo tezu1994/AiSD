@@ -48,7 +48,7 @@ for (i=0; i<n; i++)
 //dla ka¿dego wierzcholka
 for ( i = 0; i< n; i++ ) {
 
-	vertex_tab[i] = i; //umieszczenie numeru wierzcholka w tablicy vertex_tab
+	vertex_tab[i] = 0; //umieszczenie numeru wierzcholka w tablicy vertex_tab
 	vertex_degree[i] = 0; //zerujemy stopien wyjsciowy kazdego itego wierzcholka
 
 	//count_degree
@@ -56,7 +56,7 @@ for( j = 0; j < n ; j++){
 		if ( adj_matrix[i][j] == 1) {
 		vertex_degree[i] = vertex_degree[i] + 1;  // ka¿dorazowe wystapienie sasiada zwieksza wartosc
 		} //obliczamy stopien wyjsciowy kazdego wierzcholka
-
+}
 	//przypisujemy do zmiennej deg stopien wierzcholka i,
 	deg = vertex_degree[i];
 	int x = i;
@@ -71,8 +71,7 @@ for( j = 0; j < n ; j++){
 	vertex_degree[x] = deg;
 	vertex_tab[x] = i;
 
-}}
-
+}
 //brak przypisanego koloru
 for (i = 0 ; i < n ; i++ )
 {
