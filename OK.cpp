@@ -99,13 +99,13 @@ for(i=1; i<n; i++)  //przypisanie koloru pozostalym wierzcholkom
 				y  = vertex_color[vertex_tab[nn]];
 				color[y] = 1;
 			}
+		}
+	}
         int z=0;
         //szukanie dostepnego koloru
         while (color[z] == 1)z++;
         vertex_color[vertex_tab[i]] = z;
         if(z>colornum)colornum=z;
-        }
-    }
 }
 
 for(i=0; i<n; i++){
