@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <ctime>
 #include <cstdlib>
-#include <ctime>
 using namespace std;
 int n; //liczba wierzcholkow w grafie
 
