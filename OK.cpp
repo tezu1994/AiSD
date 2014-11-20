@@ -143,7 +143,7 @@ for (i=0; i<n; i++)  //przypisanie koloru wierzcholkom
 for(i=0; i<n; i++){
 printf(" %d = %d \n",vertex_tab[i],vertex_color[vertex_tab[i]]);
 }
-printf("Ilosc zuzytych kolorow: %d\n\n",colornum+1);
+printf("Ilosc zuzytych kolorow: %d\n\n",colornum2+1);
 //RS COLOR like a Greedy COLOR
 printf("RS COLOR:\n");
 bool used[n]; //czy dany wierzcholek zostal wylosowany do tablicy
@@ -181,7 +181,7 @@ for (i=0; i<n; i++)  //przypisanie koloru wierzcholkom
 for(i=0; i<n; i++){
 printf(" %d = %d \n",vertex_tab[i],vertex_color[vertex_tab[i]]);
 }
-printf("Ilosc zuzytych kolorow: %d\n\n",colornum+1);
+printf("Ilosc zuzytych kolorow: %d\n\n",colornum3+1);
 
 return 0;
 }
