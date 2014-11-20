@@ -95,7 +95,7 @@ for(i=1; i<n; i++)  //przypisanie koloru pozostalym wierzcholkom
 
 	//kolor sasiada oznaczamy jako zajety
 	for (nn=0; nn<n; nn++) {
-		if (adjmatrix[vertex_tab[i]][nn] == 1) {
+		if (adjmatrix[vertex_tab[i]][vertex_tab[nn]] == 1) {
 			if (vertex_color[vertex_tab[nn]] != -1 )
 			{
 				y  = vertex_color[vertex_tab[nn]];
@@ -125,7 +125,7 @@ for (i=0; i<n; i++)  //przypisanie koloru wierzcholkom
 
 	//kolor sasiada oznaczamy jako zajety
 	for (nn=0; nn<n; nn++) {
-		if (adjmatrix[i][nn] == 1) {
+		if (adjmatrix[vertex_tab[i]][vertex_tab[nn]] == 1) {
 			if (vertex_color[vertex_tab[nn]] != -1 )
 			{
 				y  = vertex_color[vertex_tab[nn]];
@@ -163,7 +163,7 @@ for (i=0; i<n; i++)  //przypisanie koloru wierzcholkom
 
 	//kolor sasiada oznaczamy jako zajety
 	for (nn=0; nn<n; nn++) {
-		if (adjmatrix[vertex_tab[i]][nn] == 1) {
+		if (adjmatrix[vertex_tab[i]][vertex_tab[nn]] == 1) {
 			if (vertex_color[vertex_tab[nn]] != -1 )
 			{
 				y  = vertex_color[vertex_tab[nn]];
@@ -182,6 +182,61 @@ for(i=0; i<n; i++){
 printf(" %d = %d \n",vertex_tab[i],vertex_color[vertex_tab[i]]);
 }
 printf("Ilosc zuzytych kolorow: %d\n\n",colornum3+1);
+
+
+cout<<"BF COLOR:"<<endl;
+
+int b,bc,*tabkolor;
+  unsigned long long licznikprob;         // Licznik prób
+  bool test;
+ tabkolor = new int [n];
+  licznikprob = 0;
+
+  for(i = 0; i < n; i++) tabkolor[i] = 0; // Inicjujemy licznik
+
+  b = 2;                          // Zliczanie rozpoczynamy przy podstawie 2
+  bc = 0;                         // Liczba najstarszych cyfr
+
+  while(true)
+  {
+    if(bc)                        // Kombinację sprawdzamy, gdy zawiera najstarszą cyfrę
+    {
+      test = true;
+      licznikprob++;                      // Zwiększamy liczbę prób
+      for(i= 0; i < n; i++)      // Przeglądamy wierzchołki grafu
+      {
+        for(j=0;j<n;j++) // Przeglądamy sąsiadów wierzchołka v
+          if (adjmatrix[i][j]==1 &&i<j)
+          {if(tabkolor[i] == tabkolor[j])   // Testujemy pokolorowanie
+          {
+            test = false;         // Zaznaczamy porażkę
+            break;                // Opuszczamy pętlę for
+          }
+        if(!test) break;   }       // Opuszczamy pętlę for
+      }
+      if(test) break;             // Kombinacja znaleziona, kończymy pętlę główną
+    }
+
+    while(true)                   // Pętla modyfikacji licznika
+    {
+       for(i = 0; i < n; i++)
+       {
+         tabkolor[i]++;                 // Zwiększamy cyfrę
+         if(tabkolor[i] == b - 1) bc++;
+         if(tabkolor[i] < b) break;
+         tabkolor[i] = 0;               // Zerujemy cyfrę
+         bc--;
+       }
+
+       if(i < n) break;           // Wychodzimy z pętli zwiększania licznika
+       b++;                       // Licznik się przewinął, zwiększamy bazę
+    }
+  }
+
+
+for(i = 0; i < n; i++)
+    cout <<  " " << i << " = " << tabkolor[i] << endl;
+  cout << "Ilosc zuzytych kolorow: " << b << endl;
 
 return 0;
 }
